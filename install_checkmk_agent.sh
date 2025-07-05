@@ -1,5 +1,4 @@
 
----
 
 ## 📜 Script `install_checkmk_agent.sh` (se quiser usar)
 
