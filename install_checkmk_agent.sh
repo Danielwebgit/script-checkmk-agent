@@ -1,21 +1,19 @@
 #!/bin/bash
 
-# Atualiza repositório e instala xinetd (se não tiver)
-if ! command -v xinetd >/dev/null 2>&1; then
-  apt update
-  apt install -y xinetd
-fi
+# Atualizar sistema e instalar xinetd, se necessário
+apt update
+apt install -y xinetd curl
 
-# Baixa agente com redirecionamento
+# Baixar agente com opção -L para seguir redirecionamentos
 curl -LO https://download.checkmk.com/checkmk/2.2.0p17/check-mk-agent_2.2.0p17-1_all.deb
 
-# Verifica se o arquivo está ok
+# Verificar se arquivo é pacote Debian
 file check-mk-agent_2.2.0p17-1_all.deb
 
-# Instala agente
+# Instalar agente
 dpkg -i check-mk-agent_2.2.0p17-1_all.deb
 
-# Reinicia e habilita xinetd
+# Reiniciar e habilitar xinetd
 systemctl restart xinetd
 systemctl enable xinetd
 
